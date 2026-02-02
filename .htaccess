@@ -1,0 +1,22 @@
+
+# --------------------------
+# Ativar mod_rewrite do Apache
+# --------------------------
+RewriteEngine On
+
+# --------------------------
+# === MODO MANUTENÇÃO ===
+# Descomente as 3 linhas abaixo para colocar TODO o site em manutenção
+# (inclusive se estiver funcionando normalmente)
+# --------------------------
+# RewriteCond %{REQUEST_URI} !^/manutencao\.html$
+# RewriteCond %{REQUEST_URI} !\.(jpg|jpeg|png|gif|css|js|woff|ttf|svg)$ [NC]
+# RewriteRule ^(.*)$ /manutencao.html [R=302,L]
+
+# --------------------------
+# === TRATAMENTO DE ERROS ===
+# Redireciona para manutencao.html se acontecer algum erro comum
+# --------------------------
+ErrorDocument 404 /404.html
+ErrorDocument 500 /manutencao.html
+ErrorDocument 403 /manutencao.html

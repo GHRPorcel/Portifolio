@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Agência de Design — Portfólio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0b1f2a;
+    --muted:#5b6b73;
+    --blue:#1677ff;
+    --blue-ink:#fff;
+    --line:#edf1f3;
+    --maxw:1120px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    color:var(--ink); background:#f7f3f1;
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  }
+
+  /* ===== Header ===== */
+  .header{border-bottom:1px solid var(--line); background:#f7f3f1; position:sticky; top:0; z-index:50}
+  .header-inner{
+    position:relative;
+    max-width:var(--maxw); margin:0 auto; padding:18px 16px;
+    display:grid; grid-template-columns:140px 1fr 140px; align-items:center;
+  }
+  .brand{display:flex; align-items:center; gap:8px; text-decoration:none; color:var(--ink); font-weight:800}
+  .brand-mark{width:28px; height:28px; border-radius:6px; background:#0ad3a1}
+  .nav{justify-self:center; display:flex; gap:28px}
+  .nav a{color:#41525a; text-decoration:none; font-weight:600}
+  .nav a:hover{color:#0b1f2a}
+
+  /* ===== Botão Hambúrguer (mobile) ===== */
+  .menu-btn{
+    position:absolute; right:16px; top:10px;
+    width:42px; height:42px; border-radius:12px;
+    border:1px solid var(--line); background:#fff; cursor:pointer;
+    display:none; align-items:center; justify-content:center;
+  }
+  .menu-btn .bars{position:relative; width:22px; height:16px}
+  .menu-btn .bar{
+    position:absolute; left:0; right:0; height:2px; background:#1f2d36; border-radius:2px;
+    transition:transform .25s ease, top .25s ease, opacity .2s ease, background .25s ease;
+  }
+  .menu-btn .bar:nth-child(1){top:0}
+  .menu-btn .bar:nth-child(2){top:7px}
+  .menu-btn .bar:nth-child(3){top:14px}
+  .is-menu-open .menu-btn .bar:nth-child(1){top:7px; transform:rotate(45deg); background:var(--blue)}
+  .is-menu-open .menu-btn .bar:nth-child(2){opacity:0; transform:translateX(-6px)}
+  .is-menu-open .menu-btn .bar:nth-child(3){top:7px; transform:rotate(-45deg); background:var(--blue)}
+  .mobile-nav{display:none; background:#fff; border-bottom:1px solid var(--line)}
+  .mobile-nav a{display:block; padding:14px 18px; text-decoration:none; color:#17323d; font-weight:600; border-top:1px dashed #eef2f5}
+  .mobile-nav a:active{background:#f2f7ff}
+  .is-menu-open .mobile-nav{display:block}
+
+  /* ===== Hero (Sessão 1) ===== */
+  .hero{
+    max-width:var(--maxw); margin:0 auto; padding:56px 16px 36px;
+    display:grid; grid-template-columns: minmax(320px,540px) minmax(320px,1fr);
+    gap:56px; align-items:center;
+  }
+  .hero-media{display:flex; justify-content:center; order:1}
+  .hero-copy{max-width:520px; justify-self:start; order:2}
+  .hero-media img{width:100%; height:auto; object-fit:contain}
+  .hero-title{font-size:44px; line-height:1.1; margin:0 0 12px}
+  .hero-sub{color:var(--muted); font-size:16px; line-height:1.6; margin:0 0 22px}
+  .cta{
+    display:inline-flex; align-items:center; justify-content:center;
+    padding:14px 22px; border-radius:999px; background:var(--blue); color:var(--blue-ink);
+    font-weight:700; text-decoration:none; min-width:200px;
+    box-shadow:0 6px 16px rgba(22,119,255,.25);
+  }
+  .cta:hover{filter:saturate(110%)}
+
+  /* ===== Sessão 2 (Features) ===== */
+  .sec2{
+    position:relative; color:#fff;
+    background:linear-gradient(180deg, #1677ff 0%, #0e57d6 100%);
+    padding:48px 16px 56px; overflow:hidden;
+  }
+  .sec2 .wave-top{position:absolute; inset:-1px 0 auto 0; width:100%; line-height:0; transform:translateY(-99%)}
+  .sec2 .inner{max-width:var(--maxw); margin:0 auto}
+  .features{display:grid; grid-template-columns:repeat(3,1fr); gap:36px; text-align:center; align-items:start}
+  .feature .icon-badge{
+    --glow: rgba(255,255,255,.35);
+    width:72px; height:72px; border-radius:50%;
+    margin:0 auto 14px; display:grid; place-items:center;
+    background:
+      radial-gradient(60% 60% at 50% 40%, rgba(255,255,255,.25), transparent 70%),
+      linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.08));
+    border:1px solid rgba(255,255,255,.28);
+    box-shadow:0 10px 28px rgba(0,0,0,.25), 0 0 0 6px rgba(255,255,255,.06), 0 0 24px var(--glow);
+    color:#fff;
+  }
+  .feature svg{display:block}
+  .feature h3{margin:.5rem 0 .35rem; font-size:1.15rem; letter-spacing:.2px}
+  .feature p{margin:0; color:rgba(255,255,255,.92); line-height:1.6}
+
+  /* ===== Sessão 3 — Pacotes completos (DESKTOP/TABLET) ===== */
+  .sec3{background:#fff; padding:56px 16px 72px}
+  .sec3 .inner{max-width:var(--maxw); margin:0 auto; text-align:center}
+  .sec3 h2{font-size:2rem; margin:0 0 .4rem; color:var(--ink)}
+  .sec3 .sub{color:var(--muted); margin:0 0 28px; line-height:1.6}
+  .pkg-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:28px; margin:10px 0 28px}
+  .pkg-card{background:#f7f8fa; border-radius:14px; border:1px solid var(--line); box-shadow:0 10px 24px rgba(0,0,0,.06); padding:18px; min-height:180px; display:flex; align-items:center; justify-content:center}
+  .mock-browser{width:100%; height:160px; border-radius:10px; background:#fff; border:1px solid #e7ebef; box-shadow:0 8px 18px rgba(0,0,0,.06); position:relative; overflow:hidden}
+  .mock-browser .bar{height:28px; background:#eceff3; display:flex; align-items:center; gap:6px; padding:0 10px}
+  .mock-browser .dot{width:8px; height:8px; border-radius:50%; background:#c1c7d0}
+  .mock-browser .body{display:grid; grid-template-columns:1fr; height:calc(100% - 28px)}
+  .mock-browser .band{background:#1f8cff}
+  .mock-browser .band.gray{background:#4c4f55}
+  .mock-circle{width:100%; height:160px; background:#fff; border:1px solid #e7ebef; box-shadow:0 8px 18px rgba(0,0,0,.06); border-radius:10px; display:grid; place-items:center; overflow:hidden}
+  .mock-circle .half{width:100%; height:50%; background:#1f8cff}
+  .mock-circle .logo{width:86px; height:86px; border-radius:999px; border:6px solid #fff; background:#1f8cff; display:grid; place-items:center; margin-top:-24px; box-shadow:0 8px 18px rgba(0,0,0,.08)}
+  .mock-swatches{width:100%; height:160px; background:#fff; border:1px solid #e7ebef; box-shadow:0 8px 18px rgba(0,0,0,.06); border-radius:10px; display:flex; align-items:center; justify-content:center; gap:18px}
+  .swatch{width:92px; height:92px; border-radius:12px; color:#fff; font-weight:700; display:flex; align-items:center; justify-content:center; box-shadow:0 6px 14px rgba(0,0,0,.12)}
+  .swatch.blue{background:#1f8cff}
+  .swatch.gray{background:#585858}
+  .btn-outline{display:inline-flex; align-items:center; justify-content:center; padding:14px 22px; border-radius:999px; border:2px solid var(--blue); color:var(--blue); background:#fff; text-decoration:none; font-weight:700; box-shadow:0 6px 16px rgba(22,119,255,.08)}
+  .btn-outline:hover{background:#f5f9ff}
+
+  /* ===== Sessão 3 — Harley CTA ===== */
+  .sec3-cta{background:#fff; padding:56px 16px}
+  .sec3-cta .inner{max-width:var(--maxw); margin:0 auto; display:grid; grid-template-columns:minmax(320px,1fr) minmax(360px,540px); align-items:center; gap:48px}
+  .sec3-cta .copy h2{font-size:2.1rem; line-height:1.15; margin:0 0 12px; color:var(--ink)}
+  .sec3-cta .copy p{margin:0 0 22px; color:var(--muted); line-height:1.6; max-width:54ch}
+  .sec3-cta .cta{display:inline-flex; align-items:center; justify-content:center; padding:14px 22px; border-radius:999px; background:var(--blue); color:#fff; font-weight:700; text-decoration:none; min-width:200px; box-shadow:0 6px 16px rgba(22,119,255,.25)}
+  .sec3-cta .media{display:flex; justify-content:center}
+  .sec3-cta .media img{width:100%; height:auto; object-fit:contain; filter:drop-shadow(0 18px 36px rgba(0,0,0,.18))}
+
+  /* ===== Sessão padrão (mesmo estilo da Sessão 2) ===== */
+  .sec-pro{background:linear-gradient(180deg,#1677ff 0%, #0e57d6 100%); color:#fff; padding:56px 16px 64px}
+  .sec-pro .inner{max-width:var(--maxw); margin:0 auto}
+  .sec-pro .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:36px; text-align:center; align-items:start}
+  .feature .icon-badge{
+    width:72px; height:72px; border-radius:50%; margin:0 auto 14px; display:grid; place-items:center;
+    background:#fff; border:1px solid #E6EBF0; box-shadow:0 10px 24px rgba(0,0,0,.20), inset 0 1px 0 rgba(255,255,255,.8);
+    color:#111;
+  }
+  .feature svg{display:block; width:36px; height:36px; stroke:currentColor; stroke-width:2; fill:none; stroke-linecap:round; stroke-linejoin:round}
+
+  /* ===== Sessão de Vídeo ===== */
+  .sec-video{background:#fff; padding:56px 16px 72px}
+  .sec-video .inner{max-width:var(--maxw); margin:0 auto; text-align:center}
+  .sec-video h2{font-size:2rem; margin:0 0 .4rem; color:var(--ink)}
+  .sec-video .sub{color:var(--muted); margin:0 0 26px; line-height:1.6}
+  .video-wrap{position:relative; width:100%; max-width:960px; margin:0 auto; background:#000; border:1px solid #e7ebef; border-radius:16px; box-shadow:0 16px 36px rgba(0,0,0,.12); overflow:hidden}
+  .video-wrap:before{content:""; display:block; padding-top:56.25%}
+  .video-wrap iframe,.video-wrap video{position:absolute; inset:0; width:100%; height:100%; border:0; display:block}
+
+  /* ========= RESPONSIVO BASE ========= */
+  @media (max-width:980px){
+    .nav{display:none}
+    .menu-btn{display:flex}
+    .hero{grid-template-columns:1fr; gap:24px; padding-top:36px}
+    .hero-copy{order:1; text-align:center}
+    .hero-copy .cta{margin:0 auto}
+    .hero-media{order:2}
+    .hero-title{font-size:34px}
+    .features{grid-template-columns:1fr; gap:22px}
+
+    .sec3-cta .inner{grid-template-columns:1fr; gap:24px}
+    .sec3-cta .copy{order:1; text-align:center}
+    .sec3-cta .copy .cta{margin:0 auto}
+    .sec3-cta .media{order:2}
+    .sec3-cta .copy h2{font-size:1.8rem}
+
+    /* >>> Pacotes completos: apenas SCROLL no mobile (sem animação) */
+    .pkg-grid{
+      display:flex; overflow-x:auto; gap:16px; padding-bottom:10px;
+      scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
+      margin:10px -6px 28px; padding-left:6px; padding-right:6px;
+    }
+    .pkg-grid::-webkit-scrollbar{display:none}
+    .pkg-card{
+      flex:0 0 72%; min-width:260px; scroll-snap-align:center;
+    }
+  }
+  @media (max-width:640px){
+    .sec3 h2, .sec-video h2{font-size:1.6rem}
+    .sec-video{padding:40px 14px 56px}
+  }
+  @media (max-width:520px){
+    .hero{padding:40px 14px 28px}
+    .hero-title{font-size:30px}
+    .cta{min-width:180px; padding:12px 18px}
+  }
+
+  /* ======= TESTEMUNHOS: carrossel manual (mobile) ======= */
+  .sec-testimonials{background:#fff; padding:56px 16px 80px}
+  .sec-testimonials .inner{max-width:var(--maxw); margin:0 auto; text-align:center}
+  .sec-testimonials h2{font-size:2rem; margin:0 0 .4rem; color:var(--ink)}
+  .sec-testimonials .sub{color:#5b6b73; margin:0 0 28px; line-height:1.6}
+  .t-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px; align-items:start; text-align:left}
+  .t-card{background:#fff; border:1px solid var(--line); border-radius:14px; padding:22px 22px 18px; box-shadow:0 10px 24px rgba(0,0,0,.06); position:relative}
+  .t-card:after{content:""; position:absolute; left:36px; bottom:-8px; width:14px; height:14px; transform:rotate(45deg); background:#fff; border-right:1px solid var(--line); border-bottom:1px solid var(--line)}
+  .t-quote{font-style:italic; color:#3a4a52; line-height:1.7; margin:0 0 16px}
+  .t-author{display:flex; align-items:center; gap:10px}
+  .t-author img{width:34px; height:34px; border-radius:50%; object-fit:cover; box-shadow:0 2px 6px rgba(0,0,0,.15)}
+  .t-name{font-weight:700; color:#0b1f2a; font-size:.95rem}
+  .t-role{color:#7b8a93; font-size:.82rem; line-height:1.2}
+  @media (max-width:980px){ .t-grid{grid-template-columns:repeat(2,1fr)} }
+  @media (max-width:620px){
+    .sec-testimonials{padding:40px 14px 64px}
+    .sec-testimonials h2{font-size:1.6rem}
+    .t-grid{
+      display:flex; overflow-x:auto; gap:16px; padding-bottom:10px;
+      scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
+    }
+    .t-grid::-webkit-scrollbar{display:none}
+    .t-card{flex:0 0 82%; min-width:260px; scroll-snap-align:start}
+  }
+  /* --- Fix: sec-pro empilhada no mobile --- */
+@media (max-width: 980px){
+  .sec-pro .grid{
+    grid-template-columns: 1fr !important; /* garante 1 coluna */
+    gap: 22px;
+  }
+  .sec-pro .feature{
+    max-width: 520px;
+    margin: 0 auto;             /* centraliza cada item */
+    text-align: center;
+  }
+  .sec-pro .feature .icon-badge{
+    margin-bottom: 12px;         /* respiro entre ícone e título */
+  }
+}
+
+/* ===== Sessão — Preços ===== */
+.sec-pricing{
+  background:#fff;
+  padding:56px 16px 80px;
+}
+.sec-pricing .inner{
+  max-width:var(--maxw);
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:minmax(320px,1fr) minmax(360px,520px);
+  gap:48px;
+  align-items:center;
+}
+
+/* imagem (esquerda) */
+.pricing-media{
+  display:flex; justify-content:center;
+}
+.pricing-media img{
+  width:80%; height:auto; object-fit:contain;
+  filter: drop-shadow(0 18px 36px rgba(0,0,0,.14));
+}
+
+/* card (direita) */
+.pricing-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:16px;
+  box-shadow:0 14px 32px rgba(0,0,0,.08);
+  padding:28px 26px;
+}
+.pricing-card h2{
+  margin:0 0 6px; font-size:2rem; color:var(--ink); text-align:center;
+}
+.pricing-sub{
+  margin:0 0 18px; text-align:center; color:var(--muted);
+}
+
+/* preço */
+.price{
+  display:flex; align-items:flex-end; justify-content:center; gap:6px;
+  margin-bottom:14px;
+}
+.price .amount{font-size:42px; font-weight:800; color:var(--ink); line-height:1}
+.price .period{color:var(--muted)}
+
+/* lista de inclusões */
+.included{
+  list-style:none; padding:0; margin:14px 0 20px; color:#32444d;
+}
+.included li{
+  display:flex; align-items:flex-start; gap:10px;
+  line-height:1.6; margin:8px 0;
+}
+.included li::before{
+  content:"";
+  width:18px; height:18px; margin-top:2px; flex:0 0 18px;
+  /* check azul via SVG embutido */
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="%231677ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>') center/18px 18px no-repeat;
+}
+
+/* CTA reaproveita .cta; centralizado no card */
+.pricing-actions{display:flex; justify-content:center}
+.pricing-card .cta{min-width:220px}
+
+/* responsivo */
+@media (max-width:980px){
+  .sec-pricing .inner{grid-template-columns:1fr; gap:24px}
+  .pricing-card{order:1}
+  .pricing-media{order:2}
+  .pricing-card h2{font-size:1.8rem}
+}
+@media (max-width:520px){
+  .sec-pricing{padding:40px 14px 64px}
+  .price .amount{font-size:36px}
+}
+
+/* ===== Sessão — Criadores / Empreendedores ===== */
+.hero-makers{ background:#fff; padding:64px 16px; }
+.hero-makers__inner{
+  max-width:var(--maxw); margin:0 auto;
+  display:grid;
+  grid-template-columns:minmax(320px,1fr) minmax(320px,520px); /* texto | imagem */
+  gap:48px; align-items:center;
+}
+.hero-makers__title{ font-size:2.2rem; line-height:1.15; margin:0 0 10px; color:var(--ink); }
+.hero-makers__sub{ color:var(--muted); margin:0 0 24px; line-height:1.6; max-width:46ch; }
+.hero-makers__cta{
+  display:inline-flex; align-items:center; justify-content:center;
+  height:46px; padding:0 22px; border-radius:999px;
+  background:var(--blue); color:#fff; text-decoration:none;
+  font-weight:800; letter-spacing:.1px;
+  box-shadow:0 8px 22px rgba(22,119,255,.25);
+  transition:transform .18s ease, filter .18s ease;
+}
+.hero-makers__cta:hover{ transform:translateY(-1px); filter:saturate(110%); }
+
+.hero-makers__media{ display:flex; justify-content:center; }
+.hero-makers__media img{
+  width:100%; max-width:520px; height:auto; object-fit:contain;
+  filter: drop-shadow(0 18px 36px rgba(0,0,0,.08));
+}
+
+/* Responsivo */
+@media (max-width:980px){
+  .hero-makers{ padding:48px 16px; }
+  .hero-makers__inner{ grid-template-columns:1fr; gap:28px; }
+  .hero-makers__copy{ text-align:center; }
+  .hero-makers__sub{ margin-left:auto; margin-right:auto; }
+  .hero-makers__media img{ max-width:460px; }
+  .hero-makers__title{ font-size:1.9rem; }
+}
+@media (max-width:520px){
+  .hero-makers{ padding:40px 14px; }
+  .hero-makers__title{ font-size:1.7rem; }
+  .hero-makers__cta{ height:44px; padding:0 18px; }
+}
+
+/* Util: acessibilidade (não quebra nada do resto) */
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* ===== Benefícios v2 (azul, moderno) ===== */
+.benefits-v2{
+  color:#fff;
+  background:linear-gradient(180deg, var(--blue) 0%, #0e57d6 100%);
+  padding:56px 16px 64px;
+  position:relative;
+  overflow:hidden;
+}
+.benefits-v2:before{
+  content:""; position:absolute; inset:-40% -30% auto auto; width:520px; height:520px;
+  background:radial-gradient(closest-side, rgba(255,255,255,.18), transparent 60%);
+  filter:blur(22px); opacity:.6; pointer-events:none;
+}
+.benefits-v2__inner{
+  max-width:var(--maxw); margin:0 auto;
+  display:grid; grid-template-columns:repeat(3,1fr); gap:28px;
+}
+.bcard{
+  background:linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.06));
+  border:1px solid rgba(255,255,255,.22);
+  border-radius:16px;
+  box-shadow:0 14px 38px rgba(0,0,0,.18);
+  padding:22px; text-align:center;
+  transition:transform .22s ease, box-shadow .22s ease;
+  backdrop-filter:saturate(120%);
+}
+.bcard:hover{ transform:translateY(-6px); box-shadow:0 18px 48px rgba(0,0,0,.24); }
+.bcard__icon{
+  display:grid; place-items:center; margin:0 auto 12px;
+  width:64px; height:64px; border-radius:50%;
+  color:#fff;
+  background:
+    radial-gradient(60% 60% at 50% 40%, rgba(255,255,255,.25), transparent 70%),
+    linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.08));
+  border:1px solid rgba(255,255,255,.28);
+  box-shadow:0 10px 28px rgba(0,0,0,.25), 0 0 0 6px rgba(255,255,255,.06);
+}
+.bcard__title{font-weight:800; font-size:1.1rem; margin:.2rem 0 .3rem}
+.bcard__text{margin:0; color:rgba(255,255,255,.92); line-height:1.6}
+
+@media (max-width:980px){
+  .benefits-v2__inner{ grid-template-columns:1fr; gap:18px; }
+}
+
+/* ===== Rodapé moderno v2 ===== */
+.footer-v2{
+  background:#0b1f2a; color:#dbe6ee;
+  padding:54px 16px 18px;
+  border-top:1px solid rgba(255,255,255,.06);
+}
+.footer-v2__inner{
+  max-width:var(--maxw); margin:0 auto;
+  display:grid; grid-template-columns:280px 1fr; gap:36px; align-items:flex-start;
+}
+.footer-v2__logo{
+  display:inline-flex; align-items:center; gap:10px;
+  font-weight:800; color:#fff; text-decoration:none; font-size:1.15rem;
+}
+.footer-v2__logo .logo-dot{ width:22px; height:22px; border-radius:6px; background:#0ad3a1; display:inline-block; }
+.footer-v2__made{ margin:.6rem 0 0; color:#9fb3bf; }
+
+.footer-v2__cols{
+  display:grid; grid-template-columns:repeat(4,1fr); gap:22px;
+}
+.f2-col{ list-style:none; margin:0; padding:0; }
+.f2-head{ color:#fff; font-weight:800; margin:0 0 .6rem; font-size:.95rem; }
+.f2-col a{ color:#c7d6df; text-decoration:none; display:inline-block; padding:.28rem 0; }
+.f2-col a:hover{ color:#fff; }
+
+/* Newsletter */
+.footer-v2__newsletter{ display:flex; flex-direction:column; gap:.6rem; }
+.footer-v2__newsletter .nl-field{ display:flex; gap:8px; }
+.footer-v2__newsletter input{
+  flex:1; height:44px; border-radius:12px; border:1px solid #244452;
+  background:#102b38; color:#e9f4fb; padding:0 12px; outline:none;
+}
+.footer-v2__newsletter input::placeholder{ color:#7da0b0; }
+.footer-v2__newsletter .nl-btn{
+  height:44px; border-radius:12px; border:0; cursor:pointer;
+  padding:0 16px; font-weight:800; color:#0e57d6; background:#fff;
+  box-shadow:0 10px 24px rgba(0,0,0,.18);
+}
+.footer-v2__newsletter .nl-note{ color:#9fb3bf; }
+
+.footer-v2__bar{
+  max-width:var(--maxw); margin:26px auto 0; padding-top:16px;
+  border-top:1px solid rgba(255,255,255,.08);
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+}
+.footer-v2__social{ list-style:none; display:flex; gap:14px; margin:0; padding:0; }
+.footer-v2__social a{ color:#c7d6df; display:inline-flex; padding:8px; border-radius:10px; background:#0e2a36; }
+.footer-v2__social a:hover{ color:#fff; background:#133646; }
+
+@media (max-width:980px){
+  .footer-v2__inner{ grid-template-columns:1fr; }
+  .footer-v2__cols{ grid-template-columns:repeat(2,1fr); }
+}
+@media (max-width:640px){
+  .footer-v2__cols{ grid-template-columns:1fr; }
+  .footer-v2__bar{ flex-direction:column; align-items:flex-start; }
+}
+/* ===== Botão header: Voltar para PrimeCodex ===== */
+.header-cta{
+  justify-self:end;
+  display:inline-flex; align-items:center; justify-content:center;
+  height:42px; padding:0 14px; border-radius:999px;
+  background:#fff; color:var(--blue); text-decoration:none; font-weight:800;
+  border:2px solid var(--blue);
+  box-shadow:0 6px 16px rgba(22,119,255,.10);
+  transition:transform .18s ease, background .18s ease, color .18s ease;
+}
+.header-cta:hover{ background:var(--blue); color:#fff; transform:translateY(-1px); }
+
+@media (max-width:980px){
+  .header-cta{ display:none; } /* no mobile vira item do menu lateral */
+}
+/* estilo do botão dentro do menu mobile */
+.mobile-nav .header-cta--mobile{
+  margin:10px 14px 16px;
+  display:flex; align-items:center; justify-content:center;
+  height:44px; border-radius:999px; font-weight:800; text-decoration:none;
+  background:var(--blue); color:#fff;
+  box-shadow:0 8px 22px rgba(22,119,255,.25);
+}
+.mobile-nav .header-cta--mobile:active{ filter:saturate(110%); }
+
+</style>
+</head>
+<body>
+
+<header class="header" role="banner">
+  <div class="header-inner">
+    <a class="brand" href="#"><span class="brand-mark" aria-hidden="true"></span><span>Designbly</span></a>
+
+    <nav class="nav" aria-label="principal">
+      <a href="#criar">Começar projeto</a>
+      <a href="#como-funciona">Como trabalhamos</a>
+      <a href="#pacotes">Pacotes</a>
+      <a href="#suporte">Contato</a>
+      <a href="https://primecodex.com.br/#portfolio-nichos">Voltar para PrimeCodex</a>
+
+    </nav>
+
+    <button class="menu-btn" id="menuBtn" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobileNav">
+      <span class="bars" aria-hidden="true"><span class="bar"></span><span class="bar"></span><span class="bar"></span></span>
+    </button>
+  </div>
+
+  <nav class="mobile-nav" id="mobileNav" aria-label="Menu mobile">
+    <a href="#criar">Começar projeto</a>
+    <a href="#como-funciona">Como trabalhamos</a>
+    <a href="#pacotes">Pacotes</a>
+    <a href="#suporte">Contato</a>
+    <a class="header-cta--mobile" href="https://primecodex.com.br/#portfolio-nichos" target="_blank" rel="noopener">
+  Voltar para PrimeCodex
+</a>
+
+  </nav>
+</header>
+
+<main>
+  <!-- ===== Sessão 1 ===== -->
+  <section class="hero" aria-labelledby="hero-title" id="criar">
+    <div class="hero-media">
+      <img src="img/dinicial.png" alt="Designer criando um sistema visual em notebook">
+    </div>
+
+    <div class="hero-copy">
+      <h1 id="hero-title" class="hero-title">
+        Design visual que impulsiona sua marca
+      </h1>
+      <p class="hero-sub">
+        Criamos identidades, logos e sistemas visuais claros e consistentes para sua empresa
+        comunicar melhor, vender mais e ser lembrada em todos os pontos de contato.
+      </p>
+      <a class="cta" href="#pacotes">Ver pacotes e valores</a>
+    </div>
+  </section>
+
+  <!-- ===== Sessão 2 ===== -->
+  <section class="sec2" id="como-funciona" aria-labelledby="sec2-title">
+    <div class="wave-top" aria-hidden="true">
+      <svg viewBox="0 0 1440 160" preserveAspectRatio="none" width="100%" height="100%">
+        <path d="M0,120 C240,40 480,40 720,120 C960,200 1200,200 1440,120 L1440,160 L0,160 Z" fill="#f7f3f1"/>
+      </svg>
+    </div>
+
+    <div class="inner">
+      <h2 id="sec2-title" style="text-align:center; margin:0 0 26px; font-size:1.6rem;">
+        Por que escolher a <strong>Designbly</strong> para o seu visual?
+      </h2>
+
+      <div class="features">
+        <article class="feature">
+          <div class="icon-badge" aria-hidden="true">
+            <svg viewBox="0 0 48 48"><path d="M6 26h7M4 31h9M8 21h6"/><circle cx="28" cy="28" r="14"/><path d="M24 7h8M28 14v4"/><path d="M28 28l7 4"/></svg>
+          </div>
+          <h3>Agilidade com qualidade</h3>
+          <p>Processos enxutos e prazos realistas para você lançar sua marca no tempo certo — sem abrir mão do padrão.</p>
+        </article>
+
+        <article class="feature">
+          <div class="icon-badge" aria-hidden="true">
+            <svg viewBox="0 0 48 48"><path d="M24 9c4 0 7 3 7 7s-3 7-7 7-7-3-7-7 3-7 7-7z"/><path d="M11 33c1.5-5.5 6.5-9 13-9s11.5 3.5 13 9"/><rect x="16" y="28" width="16" height="10" rx="2"/><circle cx="24" cy="33" r="1.5"/></svg>
+          </div>
+          <h3>Co-criação transparente</h3>
+          <p>Você participa das decisões-chave. Apresentamos caminhos, justificativas e protótipos para validar rápido.</p>
+        </article>
+
+        <article class="feature">
+          <div class="icon-badge" aria-hidden="true">
+            <svg viewBox="0 0 48 48"><path d="M28 8c6 2 10 6 12 12l-9 9c-6-2-10-6-12-12L28 8z"/><circle cx="31.5" cy="16.5" r="2.5"/><path d="M9 34c3-2 5-2 7 0M6 40c4-3 8-3 12 0"/></svg>
+          </div>
+          <h3>Pronto para todos os canais</h3>
+          <p>Entregas em PNG, SVG e guias de uso para site, redes sociais, pitch deck e materiais impressos.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Sessão 3 — Pacotes completos de marca ===== -->
+  <section class="sec3" id="pacotes">
+    <div class="inner">
+      <h2>Pacotes completos de marca</h2>
+      <p class="sub">Do favicon ao guia rápido de uso — tudo que você precisa para comunicar com consistência desde o primeiro dia.</p>
+
+      <!-- Desktop/Tablet: grade normal -->
+      <div class="pkg-grid">
+        <div class="pkg-card">
+          <div class="mock-browser" aria-hidden="true">
+            <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+            <div class="body">
+              <div class="band" style="height:60%"></div>
+              <div style="padding:16px; color:#1f8cff; font-weight:800">MyStartup</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pkg-card">
+          <div class="mock-browser" aria-hidden="true">
+            <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+            <div class="body" style="grid-template-rows: 1fr 1fr;">
+              <div style="display:flex; align-items:center; gap:10px; padding:14px">
+                <div style="width:28px;height:28px;border-radius:8px;background:#1f8cff"></div>
+                <strong>MyStartup</strong>
+              </div>
+              <div class="band"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pkg-card">
+          <div class="mock-circle" aria-hidden="true">
+            <div class="half"></div>
+            <div class="logo">
+              <svg width="34" height="34" viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 30l6-6"/><path d="M28 10c6 2 10 6 12 12l-9 9c-6-2-10-6-12-12L28 10z"/><circle cx="31.5" cy="18" r="3" fill="#fff"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="pkg-card">
+          <div class="mock-circle" aria-hidden="true" style="background:#f7f8fa">
+            <div class="half"></div>
+            <div class="logo" style="width:84px;height:84px"></div>
+          </div>
+        </div>
+
+        <div class="pkg-card">
+          <div class="mock-browser" aria-hidden="true">
+            <div class="body" style="grid-template-rows: 1fr 1fr;">
+              <div class="band"></div>
+              <div class="band gray"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pkg-card">
+          <div class="mock-swatches" aria-hidden="true">
+            <div class="swatch blue">#1F8CFF</div>
+            <div class="swatch gray">#585858</div>
+          </div>
+        </div>
+      </div>
+
+      <a class="btn-outline" href="#" download>Baixar kit de marca demo</a>
+    </div>
+  </section>
+
+  <!-- ===== Sessão 3 — Harley CTA ===== -->
+  <section class="sec3-cta" id="harley">
+    <div class="inner">
+      <div class="copy">
+        <h2>Sua marca, com personalidade</h2>
+        <p>
+          Projetos autorais que traduzem sua essência em formas, cores e tipografia. Exploramos
+          direções criativas, prototipamos e refinamos até chegar a um visual que destaca sua empresa — on e offline.
+        </p>
+        <a href="#suporte" class="cta">Solicitar proposta</a>
+      </div>
+
+      <div class="media" aria-label="Personagem na Harley">
+        <img src="img/harley.png" alt="Personagem pilotando uma Harley preta com detalhes dourados">
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Sessão Pro (ícones padronizados) ===== -->
+  <section class="sec-pro" id="recursos">
+    <div class="inner">
+      <div class="grid">
+
+        <article class="feature">
+          <div class="icon-badge" aria-hidden="true">
+            <svg viewBox="0 0 48 48">
+              <rect x="6" y="12" width="30" height="20" rx="5"/>
+              <circle cx="15" cy="22" r="2.6"/><circle cx="22" cy="22" r="2.6"/><circle cx="29" cy="22" r="2.6"/>
+              <path d="M36 10l6 24"/><circle cx="39.5" cy="22" r="3.6"/>
+            </svg>
+          </div>
+          <h3>Processo simples</h3>
+          <p>Etapas claras, checkpoints objetivos e comunicação direta para você acompanhar tudo sem ruído.</p>
+        </article>
+
+        <article class="feature">
+          <div class="icon-badge" aria-hidden="true">
+            <svg viewBox="0 0 48 48">
+              <path d="M12 32l8-20h4l8 20"/><path d="M16.5 24.5h11"/>
+              <path d="M34 30v-10"/><path d="M34 22.5c-1.1-1.5-2.7-2.5-4.7-2.5a5 5 0 1 0 0 10c2 0 3.6-1 4.7-2.5"/>
+            </svg>
+          </div>
+          <h3>Tipografia criteriosa</h3>
+          <p>Escolhas tipográficas pensadas para legibilidade, hierarquia e personalidade da sua marca.</p>
+        </article>
+
+        <article class="feature">
+          <div class="icon-badge" aria-hidden="true">
+            <svg viewBox="0 0 48 48">
+              <path d="M10 20l6-8h16l6 8-14 16L10 20z"/><path d="M10 20h28M16 12l8 24 8-24"/>
+              <path d="M22 6v4M30 6v4M38 9l-3 3M10 9l3 3"/>
+            </svg>
+          </div>
+          <h3>Ícones sob medida</h3>
+          <p>Conjunto de ícones e ilustrações alinhados ao seu estilo para reforçar a identidade em cada detalhe.</p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Sessão — Como funciona (Vídeo) ===== -->
+  <section class="sec-video" id="como-funciona-video" aria-labelledby="how-title">
+    <div class="inner">
+      <h2 id="how-title">Como funciona</h2>
+      <p class="sub">Veja o processo em 6 passos — do briefing ao kit final de marca. (seu vídeo vai aqui)<br><strong>VIDEO ILUSTRATIVO</strong></p>
+
+      <div class="video-wrap">
+        <iframe
+          src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?rel=0"
+          title="Demonstração do processo de design"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+          loading="lazy">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Sessão — O que estão falando ===== -->
+  <section class="sec-testimonials" id="depoimentos" aria-labelledby="t-title">
+    <div class="inner">
+      <h2 id="t-title">O que falam sobre a Designbly</h2>
+      <p class="sub">Resultados consistentes, comunicação clara e entregas prontas para todos os canais.</p>
+
+      <div class="t-grid">
+        <article class="t-card">
+          <p class="t-quote">“Processo super fluido e objetivo. Ficamos prontos para lançar em tempo recorde.”</p>
+          <div class="t-author">
+            <img src="img/et.png" alt="julio - Ultra Life">
+            <div><div class="t-name">Julio</div><div class="t-role">Ultra Life</div></div>
+          </div>
+        </article>
+
+        <article class="t-card">
+          <p class="t-quote">“Uma das melhores experiências que já tivemos com design de marca.”</p>
+          <div class="t-author">
+            <img src="img/et.png" alt="Victor - Carbon Growth">
+            <div><div class="t-name">Victor</div><div class="t-role">Carbon Growth</div></div>
+          </div>
+        </article>
+
+        <article class="t-card">
+          <p class="t-quote">“Conseguimos um logo e um kit completo em poucos dias. Qualidade excelente.”</p>
+          <div class="t-author">
+            <img src="img/et.png" alt="Richard - Side left">
+            <div><div class="t-name">Richard</div><div class="t-role">Side left</div></div>
+          </div>
+        </article>
+
+        <article class="t-card">
+          <p class="t-quote">“Muito simples e direto de usar. Recomendo para quem precisa de velocidade.”</p>
+          <div class="t-author">
+            <img src="img/et.png" alt="Benjamin - Disciple">
+            <div><div class="t-name">Benjamin</div><div class="t-role">Disciple</div></div>
+          </div>
+        </article>
+
+        <article class="t-card">
+          <p class="t-quote">“Era exatamente o que eu precisava: clareza, consistência e um guia de uso.”</p>
+          <div class="t-author">
+            <img src="img/et.png" alt="Michael - Side Project Stack">
+            <div><div class="t-name">Michael</div><div class="t-role">Side Project Stack</div></div>
+          </div>
+        </article>
+
+        <article class="t-card">
+          <p class="t-quote">“Impressionado com a velocidade e o cuidado com os detalhes.”</p>
+          <div class="t-author">
+            <img src="img/et.png" alt="Paulo - Startup Resources">
+            <div><div class="t-name">Paulo</div><div class="t-role">Startup Resources</div></div>
+          </div>
+        </article>
+
+        <article class="t-card">
+          <p class="t-quote">“Serviço impecável! Foi o empurrão que faltava para lançarmos o site.”</p>
+          <div class="t-author">
+            <img src="img/et.png" alt="Renato - Ice.coffee">
+            <div><div class="t-name">Renato</div><div class="t-role">Ice.coffee</div></div>
+          </div>
+        </article>
+
+        <article class="t-card">
+          <p class="t-quote">“Design limpo, claro e muito fácil de aplicar em todos os materiais.”</p>
+          <div class="t-author">
+            <img src="img/et.png" alt="Marcos - Make Projects">
+            <div><div class="t-name">Marcos</div><div class="t-role">Make Projects</div></div>
+          </div>
+        </article>
+
+        <article class="t-card">
+          <p class="t-quote">“O kit final ficou lindo. Produto muito bem pensado.”</p>
+          <div class="t-author">
+            <img src="img/et.png" alt="Carla - Developer">
+            <div><div class="t-name">Carla</div><div class="t-role">C.Estetica</div></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Sessão — Preços (imagem à esquerda / card à direita) ===== -->
+<section class="sec-pricing" id="precos">
+  <div class="inner">
+
+    <!-- Imagem/ilustração (substitua o src pelo seu PNG/SVG) -->
+    <div class="pricing-media" aria-hidden="true">
+      <img src="img/moneyy.png" alt="Ilustração de design mostrando telas e logotipos">
+    </div>
+
+    <!-- Card de preço -->
+    <aside class="pricing-card" aria-labelledby="pricing-title">
+      <h2 id="pricing-title">Plano simples</h2>
+      <p class="pricing-sub">Tudo que você precisa para lançar sua marca com confiança</p>
+
+      <div class="price">
+        <span class="amount">R$ 2490</span>
+        <span class="period">à vista</span>
+      </div>
+
+      <ul class="included">
+        <li>Logo principal + versões reduzidas</li>
+        <li>Arquivos vetoriais (SVG/AI) e PNG em alta</li>
+        <li>Favicons e avatar para redes sociais</li>
+        <li>Paleta de cores + tipografia sugerida</li>
+        <li>Guia rápido de uso (PDF)</li>
+        <li>Entrega e suporte por 7 dias</li>
+      </ul>
+
+      <div class="pricing-actions">
+        <a href="#criar" class="cta">Começar meu projeto</a>
+      </div>
+    </aside>
+
+  </div>
+</section>
+
+<!-- ===== Sessão — Criadores / Empreendedores ===== -->
+<section class="hero-makers" aria-labelledby="makers-title">
+  <div class="hero-makers__inner">
+    <div class="hero-makers__copy">
+      <h2 id="makers-title" class="hero-makers__title">
+        Para criadores, freelancers e empreendedores
+      </h2>
+      <p class="hero-makers__sub">
+        A Designbly ajuda quem faz as coisas acontecerem a tirar ideias do papel — de forma simples e rápida.
+      </p>
+      <a href="#criar" class="hero-makers__cta">Criar minha logo</a>
+    </div>
+
+    <div class="hero-makers__media" aria-hidden="true">
+      <!-- troque o src pela sua imagem -->
+      <img src="img/all.png" alt="" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- ===== Sessão — Benefícios (ícones) v2 ===== -->
+<section class="benefits-v2" id="beneficios" aria-labelledby="beneficios-title">
+  <div class="benefits-v2__inner">
+    <h2 id="beneficios-title" class="sr-only">Benefícios</h2>
+
+    <article class="bcard">
+      <span class="bcard__icon" aria-hidden="true">
+        <!-- “Sem complicação” -->
+        <svg viewBox="0 0 48 48" width="26" height="26" fill="none">
+          <path d="M8 28h32" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+          <path d="M12 24c0-8 6-14 12-14s12 6 12 14" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+          <path d="M20 24h8" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <h3 class="bcard__title">Sem complicação</h3>
+      <p class="bcard__text">Crie logos e visuais completos sem burocracia — rápido, claro e com qualidade.</p>
+    </article>
+
+    <article class="bcard">
+      <span class="bcard__icon" aria-hidden="true">
+        <!-- “Conveniente” -->
+        <svg viewBox="0 0 48 48" width="26" height="26" fill="none">
+          <rect x="10" y="14" width="28" height="18" rx="4" stroke="currentColor" stroke-width="3"/>
+          <path d="M14 22h20" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+          <path d="M24 14V8" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <h3 class="bcard__title">Conveniente</h3>
+      <p class="bcard__text">Funciona no notebook, tablet ou celular — disponível quando você precisar.</p>
+    </article>
+
+    <article class="bcard">
+      <span class="bcard__icon" aria-hidden="true">
+        <!-- “Inspirador” -->
+        <svg viewBox="0 0 48 48" width="26" height="26" fill="none">
+          <path d="M24 10c7 2 12 7 14 14L28 34c-7-2-12-7-14-14L24 10z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+          <circle cx="31.5" cy="21" r="2.5" fill="currentColor"/>
+          <path d="M12 34c4-3 8-3 12 0" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <h3 class="bcard__title">Inspirador</h3>
+      <p class="bcard__text">Estilos e combinações que elevam sua marca e destravam ideias.</p>
+    </article>
+  </div>
+</section>
+
+<!-- ===== Rodapé moderno v2 ===== -->
+<footer class="footer-v2" role="contentinfo">
+  <div class="footer-v2__inner">
+    <div class="footer-v2__brand">
+      <a href="#" class="footer-v2__logo">
+        <span class="logo-dot" aria-hidden="true"></span> Designbly
+      </a>
+      <p class="footer-v2__made">Feito com <span aria-hidden="true">❤️</span> no Brasil</p>
+    </div>
+
+    <nav class="footer-v2__cols" aria-label="links úteis">
+      <ul class="f2-col">
+        <li class="f2-head">Produto</li>
+        <li><a href="#criar">Criar projeto</a></li>
+        <li><a href="#pacotes">Planos e preços</a></li>
+        <li><a href="#recursos">Recursos</a></li>
+      </ul>
+      <ul class="f2-col">
+        <li class="f2-head">Conteúdos</li>
+        <li><a href="#">Guia de nomes</a></li>
+        <li><a href="#">Cores para startups</a></li>
+        <li><a href="#">Arquivo de logos</a></li>
+      </ul>
+      <ul class="f2-col">
+        <li class="f2-head">Empresa</li>
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#suporte">Suporte</a></li>
+      </ul>
+
+      <form class="footer-v2__newsletter" action="#" method="post">
+        <label for="nl-email" class="f2-head">Receba novidades</label>
+        <div class="nl-field">
+          <input id="nl-email" name="email" type="email" placeholder="Seu e-mail" required>
+          <button type="submit" class="nl-btn">Enviar</button>
+        </div>
+        <small class="nl-note">Sem spam. Cancelamento a qualquer momento.</small>
+      </form>
+    </nav>
+  </div>
+
+  <div class="footer-v2__bar">
+    <small>© 2025 Designbly. Todos os direitos reservados.</small>
+    <ul class="footer-v2__social" aria-label="redes sociais">
+      <li><a href="#" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg>
+      </a></li>
+      <li><a href="#" aria-label="Twitter/X">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M18.9 3H21l-6.2 7.1L22 21h-5.6l-4.4-5.8L6.9 21H3l6.8-7.8L2.3 3h5.7l4 5.3L18.9 3z"/></svg>
+      </a></li>
+      <li><a href="#" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8.5h4V23h-4V8.5zM8.5 8.5h3.8v2h.1c.5-1 1.8-2.1 3.8-2.1 4.1 0 4.9 2.7 4.9 6.2V23h-4v-6.3c0-1.5 0-3.4-2.1-3.4s-2.4 1.6-2.4 3.3V23h-4V8.5z"/></svg>
+      </a></li>
+    </ul>
+  </div>
+</footer>
+
+
+</main>
+
+<script>
+  // Toggle menu mobile
+  const menuBtn = document.getElementById('menuBtn');
+  const root = document.documentElement;
+  menuBtn?.addEventListener('click', () => {
+    const opened = root.classList.toggle('is-menu-open');
+    menuBtn.setAttribute('aria-expanded', opened ? 'true' : 'false');
+  });
+  document.querySelectorAll('.mobile-nav a').forEach(a => {
+    a.addEventListener('click', () => {
+      root.classList.remove('is-menu-open');
+      menuBtn.setAttribute('aria-expanded','false');
+    });
+  });
+</script>
+</body>
+</html>
